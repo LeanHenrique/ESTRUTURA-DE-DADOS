@@ -1,6 +1,8 @@
 #include"TipoItem.h"
 #include <iostream>
 
+using namespace std;
+
 TipoItem::TipoItem()
 {
 chave = -1; // indica um item vazio
@@ -19,5 +21,5 @@ return chave;
 }
 void TipoItem::Imprime()
 {
-printf("%d ",chave);
+cout << chave;
 }
