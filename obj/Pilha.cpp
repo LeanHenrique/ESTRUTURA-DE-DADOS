@@ -33,6 +33,16 @@ tamanho--;
 return aux;
 };
 
+TipoItem PilhaEncadeada::Topo() {
+    TipoItem aux;
+        if (Vazia()) {
+            throw "A pilha está vazia!";
+        }
+        aux = topo->item;
+        return aux;
+    }
+
+
 void PilhaEncadeada::Limpa(){
 while(!Vazia())
 Desempilha();

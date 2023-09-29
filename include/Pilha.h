@@ -1,20 +1,8 @@
 #ifndef PILHAH 
 #define PILHAH
 
+#include "TipoItem.h"
 
-typedef int TipoChave; // TipoChave é um inteiro
-class TipoItem
-{
-public:
-TipoItem();
-TipoItem(TipoChave c);
-void SetChave(TipoChave c);
-TipoChave GetChave();
-void Imprime();
-private:
-TipoChave chave;
-// outros membros
-};
 
 class TipoCelula
 {
@@ -45,6 +33,7 @@ public:
     PilhaEncadeada();
     virtual ~PilhaEncadeada();
     void Empilha(TipoItem item);
+    TipoItem Topo();
     TipoItem Desempilha();
     void Limpa();
 
