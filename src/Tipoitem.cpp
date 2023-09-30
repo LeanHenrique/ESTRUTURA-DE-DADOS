@@ -21,5 +21,5 @@ return chave;
 }
 void TipoItem::Imprime()
 {
-cout << chave;
+cout << chave << endl;
 }

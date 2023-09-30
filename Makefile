@@ -7,14 +7,14 @@ INC = include
 BIN = bin
 OBJS = $(OBJ)/final.o $(OBJ)/Arvore.o $(OBJ)/Pilha.o $(OBJ)/Tipoitem.o $(OBJ)/TipoNo.o
 HDRS = $(INC)/Arvore.h $(INC)/Pilha.h $(INC)/TipoItem.h $(INC)/TipoNo.h
-CFLAGS = -pg -Wall -c -I$(INC)
+CFLAGS = -Wall -c -I$(INC)
 
 EXE = $(BIN)/final
 
 all: $(EXE)
 
 $(EXE): $(OBJS)
-	$(CC) -pg -o $(EXE) $(OBJS) $(LIBS)
+	$(CC) -o $(EXE) $(OBJS) $(LIBS)
 
 $(OBJ)/final.o: $(HDRS) $(SRC)/final.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/final.o $(SRC)/final.cpp
