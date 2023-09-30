@@ -1,4 +1,4 @@
-#include"TipoItem.h"
+#include"../include/TipoItem.h"
 #include <iostream>
 
 using namespace std;

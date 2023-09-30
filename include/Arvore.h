@@ -1,7 +1,7 @@
 #ifndef ARVOREH
 #define ARVOREH
-#include "TipoItem.h"
-#include "TipoNo.h"
+#include "../include/TipoItem.h"
+#include "../include/TipoNo.h"
 
 class ArvoreBinaria
 {

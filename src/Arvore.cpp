@@ -1,6 +1,6 @@
-#include "Arvore.h"
+#include "../include/Arvore.h"
 #include <iostream>
-
+using namespace std;
 ArvoreBinaria::ArvoreBinaria()
 {
 raiz = NULL;
@@ -44,20 +44,6 @@ if(p!=NULL){
 PosOrdem(p->esq);
 PosOrdem(p->dir);
 p->item.Imprime();
-}
-}
-
-void ArvoreBinaria::CaminhaNivel(){
-FilaArranjo F; // fila de apontadores para nos
-TipoNo *p;
-F.Enfileira(raiz);
-while(!F.Vazia()) {
-p = F.Desenfileira();
-if(p!=NULL) {
-p->Item.Imprime();
-F.Enfileira(p->esq);
-F.Enfileira(p->dir);
-}
 }
 }
 

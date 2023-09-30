@@ -1,4 +1,4 @@
-#include "TipoNo.h"
+#include "../include/TipoNo.h"
 #include <iostream>
 
 using namespace std;

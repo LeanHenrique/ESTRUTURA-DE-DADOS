@@ -1,7 +1,7 @@
 #ifndef PILHAH 
 #define PILHAH
 
-#include "TipoItem.h"
+#include "../include/TipoItem.h"
 
 
 class TipoCelula

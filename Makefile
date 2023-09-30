@@ -1,12 +1,12 @@
 
-CC = gcc
+CC = g++
 LIBS = -lm
 SRC = src
 OBJ = obj
 INC = include
 BIN = bin
 OBJS = $(OBJ)/final.o $(OBJ)/Arvore.o $(OBJ)/Pilha.o $(OBJ)/Tipoitem.o $(OBJ)/TipoNo.o
-HDRS = $(INC)/Arvore.h $(INC)/Pilha.h $(INC)/Tipoitem.h $(INC)/TipoNo.h
+HDRS = $(INC)/Arvore.h $(INC)/Pilha.h $(INC)/TipoItem.h $(INC)/TipoNo.h
 CFLAGS = -pg -Wall -c -I$(INC)
 
 EXE = $(BIN)/final

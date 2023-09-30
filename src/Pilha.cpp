@@ -1,5 +1,6 @@
-#include "Pilha.h"
+#include "../include/Pilha.h"
 #include<iostream>
+using namespace std;
 
 TipoCelula::TipoCelula()
 {

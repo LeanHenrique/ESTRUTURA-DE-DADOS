@@ -1,6 +1,6 @@
 #ifndef TIPONOH
 #define TIPONOH
-#include "TipoItem.h"
+#include "../include/TipoItem.h"
 
 class TipoNo
 {
