@@ -1,5 +1,6 @@
 #include "../include/Pilha.h"
 #include <iostream>
+#include <string>
 using namespace std;
 
 int prioridade(char c) {
@@ -7,13 +8,11 @@ int prioridade(char c) {
         return 2; // Alta prioridade para &
     } else if (c == '|') {
         return 1; // Prioridade menor para |
-    } else if (c == '~') {
-        return 3; // Maior prioridade para ~
-    }
+    } 
     return 0; // Valor padrão para outros caracteres (como parênteses)
 }
 
-int applyBoolOp(int a, int b, char op) {
+int Operacao(int a, int b, char op) {
     switch (op) {
         case '&':
             if (a != b) {
@@ -25,14 +24,17 @@ int applyBoolOp(int a, int b, char op) {
                 return 1;
             }
             return 0;
-        case '~':
-            if (a == 0) {
-                return 1;
-            }
-            return 0;
         default:
             throw runtime_error("Operador inválido");
     }
+}
+
+bool VerificaDigito(char c) {
+    return (c >= '0' && c <= '9');
+}
+
+int ConverteInteiro(char c){
+    return c - '0';
 }
 
 PilhaEncadeada posfixa(string p) {
@@ -46,20 +48,20 @@ PilhaEncadeada posfixa(string p) {
         switch (p[i]) {
             case '(':
                 aux.Empilha(x);
-                break;
+                break; 
 
             case ')':
                 while (!aux.Vazia() && aux.Topo().GetChave() != '(') {
                     y = pos.Desempilha();
-                    int a = y.GetChave();
+                    int a = ConverteInteiro(y.GetChave());
                     
                     y = pos.Desempilha();
-                    int b = y.GetChave();
+                    int b = ConverteInteiro(y.GetChave());
                     
                     y = aux.Desempilha();
                     int op = y.GetChave();
 
-                    y.SetChave(applyBoolOp(a, b, op));
+                    y.SetChave(Operacao(a, b, op));
                     pos.Empilha(y);
                 }
 
@@ -69,44 +71,45 @@ PilhaEncadeada posfixa(string p) {
                 break;
 
             case '|':
-            case '~':
             case '&':
-                while (!aux.Vazia() && prioridade(x.GetChave()) <= prioridade(aux.Topo().GetChave())) {
+                while (!aux.Vazia() &&  prioridade(aux.Topo().GetChave()) >= prioridade(x.GetChave())) {
                     y = pos.Desempilha();
-                    int a = y.GetChave();
+                    int a = ConverteInteiro(y.GetChave());
                     
                     y = pos.Desempilha();
-                    int b = y.GetChave();
+                    int b = ConverteInteiro(y.GetChave());
                     
                     y = aux.Desempilha();
                     int op = y.GetChave();
 
-                    y.SetChave(applyBoolOp(a, b, op));
-                    pos.Empilha(y); 
+                    y.SetChave(Operacao(a, b, op));
+                    pos.Empilha(y);
                 } 
-
                 aux.Empilha(x); // Empilhar o operador na pilha de operadores
                 break;
           
             default:
                 if (x.GetChave() != ' ') {
-                    pos.Empilha(x); // Empilhar operandos na pilha de saída
+                    if ((VerificaDigito(p[i])))
+                    {
+                        pos.Empilha(x); // Empilhar operandos na pilha de saída
+                    }     
                 }
                 break;
         }
     }
 
    if(!aux.Vazia()){
-                     y = pos.Desempilha();
-                    int a = y.GetChave();
+                    y = pos.Desempilha();
+                    int a = ConverteInteiro(y.GetChave());
                     
                     y = pos.Desempilha();
-                    int b = y.GetChave();
+                    int b = ConverteInteiro(y.GetChave());
                     
                     y = aux.Desempilha();
                     int op = y.GetChave();
 
-                    y.SetChave(applyBoolOp(a, b, op));
+                    y.SetChave(Operacao(a, b, op));
                     pos.Empilha(y);
                 } 
    
