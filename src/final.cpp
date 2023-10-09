@@ -3,6 +3,7 @@
 #include <string>
 using namespace std;
 
+
 int prioridade(char c) {
     if (c == '&') {
         return 2; // Alta prioridade para &
@@ -15,15 +16,12 @@ int prioridade(char c) {
 int Operacao(int a, int b, char op) {
     switch (op) {
         case '&':
-            if (a != b) {
-                return 0;
-            }
-            return a;
+            return(a * b);
         case '|':
-            if (a == 1 || b == 1) {
-                return 1;
-            }
-            return 0;
+             if(a == 1 && b == 1){
+                return a;
+             }
+            return(a + b);
         default:
             throw runtime_error("Operador inválido");
     }
@@ -42,7 +40,7 @@ PilhaEncadeada posfixa(string p) {
     PilhaEncadeada pos; // Pilha de saída (resultado)
     TipoItem x , y;
 
-    for (int i = 0; i < p.size(); i++) {
+    for (int i = 0; i < static_cast<int>(p.size()); i++) {
         x.SetChave(p[i]);
 
         switch (p[i]) {
@@ -53,15 +51,15 @@ PilhaEncadeada posfixa(string p) {
             case ')':
                 while (!aux.Vazia() && aux.Topo().GetChave() != '(') {
                     y = pos.Desempilha();
-                    int a = ConverteInteiro(y.GetChave());
+                    int a = y.GetChave();
                     
                     y = pos.Desempilha();
-                    int b = ConverteInteiro(y.GetChave());
+                    int b = y.GetChave();;
                     
                     y = aux.Desempilha();
-                    int op = y.GetChave();
+                    char op = y.GetChave();
 
-                    y.SetChave(Operacao(a, b, op));
+                    y.SetChave(Operacao(a, b, op) - '0');
                     pos.Empilha(y);
                 }
 
@@ -74,15 +72,15 @@ PilhaEncadeada posfixa(string p) {
             case '&':
                 while (!aux.Vazia() &&  prioridade(aux.Topo().GetChave()) >= prioridade(x.GetChave())) {
                     y = pos.Desempilha();
-                    int a = ConverteInteiro(y.GetChave());
+                    int a = y.GetChave();
                     
                     y = pos.Desempilha();
-                    int b = ConverteInteiro(y.GetChave());
+                    int b = y.GetChave();;
                     
                     y = aux.Desempilha();
-                    int op = y.GetChave();
+                    char op = y.GetChave();
 
-                    y.SetChave(Operacao(a, b, op));
+                    y.SetChave(Operacao(a, b, op) - '0');
                     pos.Empilha(y);
                 } 
                 aux.Empilha(x); // Empilhar o operador na pilha de operadores
@@ -101,15 +99,15 @@ PilhaEncadeada posfixa(string p) {
 
    if(!aux.Vazia()){
                     y = pos.Desempilha();
-                    int a = ConverteInteiro(y.GetChave());
+                    int a = y.GetChave();
                     
                     y = pos.Desempilha();
-                    int b = ConverteInteiro(y.GetChave());
+                    int b = y.GetChave();;
                     
                     y = aux.Desempilha();
-                    int op = y.GetChave();
+                    char op = y.GetChave();
 
-                    y.SetChave(Operacao(a, b, op));
+                    y.SetChave(Operacao(a, b, op) - '0');
                     pos.Empilha(y);
                 } 
    
@@ -119,13 +117,14 @@ PilhaEncadeada posfixa(string p) {
 
 int main() {
     // Teste posfixa
-    string expressao = "1 & 1 & ( 1 & 1 )";
+    string expressao = " 1 & ( 0 | 1 )";
     PilhaEncadeada resultado = posfixa(expressao);
     TipoItem x;
 
     while (!resultado.Vazia()) {
         x = resultado.Desempilha();
-        cout << x.GetChave() << " ";
+        int a = ConverteInteiro(x.GetChave());
+        cout << a << " ";
     }
 
     cout << endl; 

@@ -5,7 +5,7 @@ using namespace std;
 
 TipoItem::TipoItem()
 {
-chave = -1; // indica um item vazio
+chave = ' '; // indica um item vazio
 }
 TipoItem::TipoItem(TipoChave c)
 {
