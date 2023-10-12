@@ -3,7 +3,7 @@
 
 
 
-typedef char TipoChave; // TipoChave é um CHAR
+typedef int TipoChave; // TipoChave é um CHAR
 class TipoItem
 {
 public:

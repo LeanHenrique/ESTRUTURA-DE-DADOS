@@ -1,4 +1,3 @@
-
 CC = g++
 LIBS = -lm
 SRC = src
@@ -7,7 +6,8 @@ INC = include
 BIN = bin
 OBJS = $(OBJ)/final.o $(OBJ)/Arvore.o $(OBJ)/Pilha.o $(OBJ)/Tipoitem.o $(OBJ)/TipoNo.o
 HDRS = $(INC)/Arvore.h $(INC)/Pilha.h $(INC)/TipoItem.h $(INC)/TipoNo.h
-CFLAGS = -Wall -c -I$(INC)
+CFLAGS = -Wall -g -c -I$(INC)
+DEBUG_FLAGS = -g
 
 EXE = $(BIN)/final
 
@@ -31,6 +31,8 @@ $(OBJ)/Tipoitem.o: $(HDRS) $(SRC)/Tipoitem.cpp
 $(OBJ)/TipoNo.o: $(HDRS) $(SRC)/TipoNo.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/TipoNo.o $(SRC)/TipoNo.cpp
 
+debug: $(EXE)
+	gdb $(EXE)
 
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out *grind*

@@ -50,16 +50,20 @@ PilhaEncadeada posfixa(string p) {
 
             case ')':
                 while (!aux.Vazia() && aux.Topo().GetChave() != '(') {
+                    // Desempilhando e armazenando as variaveis com valor padrão
                     y = pos.Desempilha();
-                    int a = y.GetChave();
+                    int a = ConverteInteiro(y.GetChave());
                     
                     y = pos.Desempilha();
-                    int b = y.GetChave();;
+                    int b = ConverteInteiro(y.GetChave());
                     
                     y = aux.Desempilha();
-                    char op = y.GetChave();
+                    int op = y.GetChave();
 
-                    y.SetChave(Operacao(a, b, op) - '0');
+                    int c = Operacao(a,b,op);
+
+                    //empilhando as variaveis com valor ASCII
+                    y.SetChave(c + '0');
                     pos.Empilha(y);
                 }
 
@@ -71,18 +75,22 @@ PilhaEncadeada posfixa(string p) {
             case '|':
             case '&':
                 while (!aux.Vazia() &&  prioridade(aux.Topo().GetChave()) >= prioridade(x.GetChave())) {
+                    // Deempilhando e armazenando as variaveis com valor padrão
                     y = pos.Desempilha();
-                    int a = y.GetChave();
+                    int a = ConverteInteiro(y.GetChave());
                     
                     y = pos.Desempilha();
-                    int b = y.GetChave();;
+                    int b = ConverteInteiro(y.GetChave());
                     
                     y = aux.Desempilha();
-                    char op = y.GetChave();
+                    int op = y.GetChave();
 
-                    y.SetChave(Operacao(a, b, op) - '0');
+                    int c = Operacao(a,b,op);
+
+                    //empilhando as variaveis com valor ASCII
+                    y.SetChave(c + '0');
                     pos.Empilha(y);
-                } 
+                }
                 aux.Empilha(x); // Empilhar o operador na pilha de operadores
                 break;
           
@@ -91,6 +99,7 @@ PilhaEncadeada posfixa(string p) {
                     if ((VerificaDigito(p[i])))
                     {
                         pos.Empilha(x); // Empilhar operandos na pilha de saída
+
                     }     
                 }
                 break;
@@ -98,16 +107,20 @@ PilhaEncadeada posfixa(string p) {
     }
 
    if(!aux.Vazia()){
+                    // Dsempilhando e armazenando as variaveis com valor padrão
                     y = pos.Desempilha();
-                    int a = y.GetChave();
+                    int a = ConverteInteiro(y.GetChave());
                     
                     y = pos.Desempilha();
-                    int b = y.GetChave();;
+                    int b = ConverteInteiro(y.GetChave());
                     
                     y = aux.Desempilha();
-                    char op = y.GetChave();
+                    int op = y.GetChave();
 
-                    y.SetChave(Operacao(a, b, op) - '0');
+                    int c = Operacao(a,b,op);
+
+                    //empilhando as variaveis com valor ASCII
+                    y.SetChave(c + '0');
                     pos.Empilha(y);
                 } 
    
@@ -117,7 +130,7 @@ PilhaEncadeada posfixa(string p) {
 
 int main() {
     // Teste posfixa
-    string expressao = " 1 & ( 0 | 1 )";
+    string expressao = " 0 & ( 0 | 1 )";
     PilhaEncadeada resultado = posfixa(expressao);
     TipoItem x;
 
