@@ -46,6 +46,27 @@ int ConverteInteiro(char c){
     return c - '0';
 }
 
+string trataexpressao(string p, string s) {
+   string resultado;
+
+    for (int i = 0; i < static_cast<int>(p.size()); i++) {
+        if (VerificaDigito(p[i])) {
+            if (i + 1 < static_cast<int>(p.size()) && VerificaDigito(p[i + 1])) {
+                int duploDigito = (p[i] - '0') * 10 + (p[i + 1] - '0');
+                resultado += s[duploDigito];
+                i++; // Pulando o próximo valor da expressão
+            } else {
+                int digit = p[i] - '0';
+                resultado += s[digit];
+            }
+        } else {
+            resultado += p[i];
+        }
+    }
+
+    return resultado;
+}
+
 PilhaEncadeada posfixa(string p) {
     PilhaEncadeada aux; // Pilha auxiliar para operadores
     PilhaEncadeada pos; // Pilha de saída (resultado)
@@ -151,8 +172,12 @@ PilhaEncadeada posfixa(string p) {
 
 int main() {
     // Teste posfixa
-    string expressao = " ~ 0 & ( 0 | 1 )";
-    PilhaEncadeada resultado = posfixa(expressao);
+    string expressao = " 0 & ~ 12 | ( 1 & 32 ) & 5 | ( 6 & 7 ) | 8 & 9 ";
+    string valores = "010101001100110101001100110110101";
+    
+    string expressaotratada = trataexpressao(expressao,valores);
+    cout << expressaotratada << endl;
+    PilhaEncadeada resultado = posfixa(expressaotratada);
     TipoItem x;
 
     while (!resultado.Vazia()) {
