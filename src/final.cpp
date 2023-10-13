@@ -16,6 +16,7 @@ int prioridade(char c) {
     return 0; // Valor padrão para outros caracteres (como parênteses)
 }
 
+//calcula as operações & e |
 int Operacao(int a, int b, char op) {
     switch (op) {
         case '&':
@@ -30,6 +31,7 @@ int Operacao(int a, int b, char op) {
     }
 }
 
+//calcula a negação
 int negacao(int a) {
     if (a == 0) {
         return 1;
@@ -38,14 +40,17 @@ int negacao(int a) {
     }
 }
 
+//verifica se o caractere é um digito
 bool VerificaDigito(char c) {
     return (c >= '0' && c <= '9');
 }
 
+//converte os valoress ASCII para inteiro
 int ConverteInteiro(char c){
     return c - '0';
 }
 
+//trata a expressão de entrada com os valores correspondentes
 string trataexpressao(string p, string s) {
    string resultado;
 
@@ -82,6 +87,13 @@ PilhaEncadeada posfixa(string p) {
 
             case ')':
                 while (!aux.Vazia() && aux.Topo().GetChave() != '(') {
+                    if(aux.Topo().GetChave() == '~'){
+                        y = pos.Desempilha();
+                        int a = ConverteInteiro(y.GetChave());
+                        y.SetChave(negacao(a)+'0');
+                        pos.Empilha(y);
+                        break;
+                    }else{   
                     // Desempilhando e armazenando as variaveis com valor padrão
                     y = pos.Desempilha();
                     int a = ConverteInteiro(y.GetChave());
@@ -98,6 +110,7 @@ PilhaEncadeada posfixa(string p) {
                     y.SetChave(c + '0');
                     pos.Empilha(y);
                 }
+                }
 
                 if (!aux.Vazia() && aux.Topo().GetChave() == '(') {
                     aux.Desempilha(); // Desempilhar o '('
@@ -106,17 +119,29 @@ PilhaEncadeada posfixa(string p) {
 
             case '~':
             {
+                //trata negação em caso do proximo valor ser um numero
+                if(p[i+2] < static_cast<int>(p.size() ) && VerificaDigito(p[i+2])){
                 x.SetChave(p[i + 2]);
                 int digit = ConverteInteiro(x.GetChave());
                 x.SetChave(negacao(digit) + '0');
                 pos.Empilha(x);
                 i = i+2; // Avance para o próximo caractere (o operando negado)
                 break;
+            }else{ //empilha o operador caso o proximo valor não for um numero
+                aux.Empilha(x);
             }     
-
+             break;
             case '|':
             case '&':
                 while (!aux.Vazia() &&  prioridade(aux.Topo().GetChave()) >= prioridade(x.GetChave())) {
+                    //tratando negação
+                    if(aux.Topo().GetChave() == '~'){
+                        y = pos.Desempilha();
+                        int a = ConverteInteiro(y.GetChave());
+                        y.SetChave(negacao(a)+'0');
+                        pos.Empilha(y);
+                        break;
+                    }else{   
                     // Deempilhando e armazenando as variaveis com valor padrão
                     y = pos.Desempilha();
                     int a = ConverteInteiro(y.GetChave());
@@ -132,6 +157,7 @@ PilhaEncadeada posfixa(string p) {
                     //empilhando as variaveis com valor ASCII
                     y.SetChave(c + '0');
                     pos.Empilha(y);
+                  } 
                 }
                 aux.Empilha(x); // Empilhar o operador na pilha de operadores
                 break;
@@ -147,8 +173,15 @@ PilhaEncadeada posfixa(string p) {
                 break;
         }
     }
-
+    }
    if(!aux.Vazia()){
+
+                    if(aux.Topo().GetChave() == '~'){
+                        y = pos.Desempilha();
+                        int a = ConverteInteiro(y.GetChave());
+                        y.SetChave(negacao(a)+'0');
+                        pos.Empilha(y);
+                    }else{   
                     // Dsempilhando e armazenando as variaveis com valor padrão
                     y = pos.Desempilha();
                     int a = ConverteInteiro(y.GetChave());
@@ -165,15 +198,15 @@ PilhaEncadeada posfixa(string p) {
                     y.SetChave(c + '0');
                     pos.Empilha(y);
                 } 
-   
+   }
 
-    return pos; // Retornar a pilha de saída (resultado da expressão pós-fixa)
+    return pos; // Retornar a pilha de saída 
 }
 
 int main() {
     // Teste posfixa
-    string expressao = " 0 & ~ 12 | ( 1 & 32 ) & 5 | ( 6 & 7 ) | 8 & 9 ";
-    string valores = "010101001100110101001100110110101";
+    string expressao = "~ ( 0 | 1 ) & 2";
+    string valores = "101";
     
     string expressaotratada = trataexpressao(expressao,valores);
     cout << expressaotratada << endl;
