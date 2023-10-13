@@ -5,6 +5,9 @@ using namespace std;
 
 
 int prioridade(char c) {
+    if (c == '~') {
+        return 3; // Prioridade absoluta para ~
+    }
     if (c == '&') {
         return 2; // Alta prioridade para &
     } else if (c == '|') {
@@ -16,14 +19,22 @@ int prioridade(char c) {
 int Operacao(int a, int b, char op) {
     switch (op) {
         case '&':
-            return(a * b);
+            return (a * b);
         case '|':
-             if(a == 1 && b == 1){
+            if (a == 1 && b == 1) {
                 return a;
-             }
-            return(a + b);
+            }
+            return (a + b);
         default:
-            throw runtime_error("Operador inválido");
+            throw std::runtime_error("Operador inválido");
+    }
+}
+
+int negacao(int a) {
+    if (a == 0) {
+        return 1;
+    } else {
+        return 0;
     }
 }
 
@@ -71,6 +82,16 @@ PilhaEncadeada posfixa(string p) {
                     aux.Desempilha(); // Desempilhar o '('
                 }
                 break;
+
+            case '~':
+            {
+                x.SetChave(p[i + 2]);
+                int digit = ConverteInteiro(x.GetChave());
+                x.SetChave(negacao(digit) + '0');
+                pos.Empilha(x);
+                i = i+2; // Avance para o próximo caractere (o operando negado)
+                break;
+            }     
 
             case '|':
             case '&':
@@ -130,7 +151,7 @@ PilhaEncadeada posfixa(string p) {
 
 int main() {
     // Teste posfixa
-    string expressao = " 0 & ( 0 | 1 )";
+    string expressao = " ~ 0 & ( 0 | 1 )";
     PilhaEncadeada resultado = posfixa(expressao);
     TipoItem x;
 
