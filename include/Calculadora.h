@@ -13,7 +13,7 @@ int ConverteInteiro(char c);
 bool busca(string s, char c);
 int OperacaoB(char c, int a, int b);
 string guardaQuant(string expressao);
-std::string trataexpressao(std::string p, std::string s);
-PilhaEncadeada posfixa(std::string p);
+std::string trataexpressao(string p, string s);
+PilhaEncadeada posfixa(string p);
 
 #endif // CALCULADORAH

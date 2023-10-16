@@ -1,6 +1,5 @@
 #include "../include/Arvore.h"
-#include <iostream>
-using namespace std;
+
 ArvoreBinaria::ArvoreBinaria()
 {
 raiz = NULL;

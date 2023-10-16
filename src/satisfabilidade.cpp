@@ -1,8 +1,6 @@
-#include "../include/Calculadora.h"
-#include "../include/Arvore.h"
-#include <iostream>
-#include <string>
-using namespace std;
+#include "../include/satisfabilidade.h"
+
+
 
 int calcularNivelDoNo(TipoNo* raiz, TipoNo* noAlvo, int nivelAtual) {
     if (raiz == NULL) {
@@ -72,6 +70,10 @@ void calcularResultadosFolhas(ArvoreBinaria& arvore, TipoNo* no, string expressa
 
             x = resultado.Desempilha();
             r += x.GetChave();
+
+            if(r == "1"){
+                no->SetExpressao(valores);
+            }
    
      
         // Atualiza o valor do nó na árvore com o resultado da expressão
@@ -104,7 +106,29 @@ void calcularResultadosExpressoes(ArvoreBinaria& arvore, TipoNo* no, string quan
         char r = result + '0';
         string item = "";
         item += r;
+
+        //verifica se o resultado é positivo e se for, armazena a expressao de possiveis valores
+        if(item  == "1"){ 
+             if(quant[nivel] == 'a'){
+                no->SetExpressao(no->GetItem());
+             }else{
+             int totalE = no->GetEsq()->GetTotalConexoes();
+             for(int i = 0; i < totalE; i++ ){
+             string valores = no->GetEsq()->GetExpressao(i);   
+             no->SetExpressao(valores);
+            }
+            
+            int totalD = no->GetDir()->GetTotalConexoes();
+             for(int i = 0; i < totalD; i++ ){
+             string valores = no->GetDir()->GetExpressao(i);   
+             no->SetExpressao(valores);
+            }
+             }
+
+            
         
+        }
+
         // Atualize o valor do nó na árvore com o resultado da expressão
         no->SetItem(item);
     }
@@ -112,25 +136,23 @@ void calcularResultadosExpressoes(ArvoreBinaria& arvore, TipoNo* no, string quan
 }
 
 
-int main() {
-    ArvoreBinaria arvore;
-    TipoNo *p = new TipoNo();
-    std::string valores = "0e0";
-    string expressao= "0 | 1 & 2";
+string verificaPossivel(ArvoreBinaria& Arvore,TipoNo* raiz, string quant, string expressao){
+    int Total = raiz->GetTotalConexoes();
+    int TotalB;
+    if(quant.size() == 1){
+        TotalB = 2;
+    } else {
+    TotalB =  (quant.size() * quant.size());
+    }
+    if(Total == TotalB){
+       string expressaor = expressao;
+            for(int i = 0; i < static_cast<int>(expressaor.size()); i++){
+                if(expressao[i] == 'e'){
+                expressaor[i] = 'a';
+               }
+              }
+             return expressaor;
+             }
+             return raiz->GetExpressao(0);
+            }
 
-    string quant = guardaQuant(valores);
-    setCombinacoes(arvore,p, valores);
-    calcularResultadosFolhas(arvore,arvore.Getraiz(),expressao);
-    calcularResultadosExpressoes(arvore,arvore.Getraiz(),quant);
-
-
-
-
-    // Agora, a árvore contém todas as combinações da expressão "00XX1".
-
-    // Você pode usar a função InOrdem da sua classe para imprimir as combinações.
-    std::cout << "Combinações possíveis da expressão " << expressao << ":" << std::endl;
-    arvore.PreOrdem(arvore.Getraiz());
-
-    return 0;
-}

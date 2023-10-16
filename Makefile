@@ -4,23 +4,26 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/final.o $(OBJ)/Arvore.o $(OBJ)/Pilha.o $(OBJ)/Tipoitem.o $(OBJ)/TipoNo.o $(OBJ)/satisfabilidade.o
+OBJS = $(OBJ)/Calculadora.o $(OBJ)/Arvore.o $(OBJ)/Pilha.o $(OBJ)/Tipoitem.o $(OBJ)/TipoNo.o $(OBJ)/satisfabilidade.o $(OBJ)/main.o
 HDRS = $(INC)/Arvore.h $(INC)/Pilha.h $(INC)/TipoItem.h $(INC)/TipoNo.h $(INC)/Calculadora.h
 CFLAGS = -Wall -g -c -I$(INC)
 DEBUG_FLAGS = -g
 
-EXE = $(BIN)/final
+EXE = $(BIN)/tp1.out
 
 all: $(EXE)
 
 $(EXE): $(OBJS)
 	$(CC) -o $(EXE) $(OBJS) $(LIBS)
 
+$(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp
+
 $(OBJ)/satisfabilidade.o: $(HDRS) $(SRC)/satisfabilidade.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/satisfabilidade.o $(SRC)/satisfabilidade.cpp
 
-$(OBJ)/final.o: $(HDRS) $(SRC)/final.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/final.o $(SRC)/final.cpp
+$(OBJ)/Calculadora.o: $(HDRS) $(SRC)/Calculadora.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/Calculadora.o $(SRC)/Calculadora.cpp
 
 $(OBJ)/Arvore.o: $(HDRS) $(SRC)/Arvore.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/Arvore.o $(SRC)/Arvore.cpp

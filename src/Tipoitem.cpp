@@ -1,7 +1,7 @@
 #include"../include/TipoItem.h"
-#include <iostream>
 
-using namespace std;
+
+
 
 TipoItem::TipoItem()
 {

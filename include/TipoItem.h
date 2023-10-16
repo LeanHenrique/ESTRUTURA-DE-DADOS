@@ -1,6 +1,7 @@
 #ifndef TIPOITEMH
 #define TIPOITEMH
-
+#include <iostream>
+using namespace std;
 
 
 typedef int TipoChave; // TipoChave é um CHAR

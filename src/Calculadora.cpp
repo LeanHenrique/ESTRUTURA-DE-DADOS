@@ -1,7 +1,5 @@
 #include"../include/Calculadora.h"
-#include <iostream>
-#include <string>
-using namespace std;
+
 
 int prioridade(char c) {
     if (c == '~') {
@@ -86,6 +84,8 @@ int OperacaoB(char c, int a, int b){
     }
 }
 
+
+
 //trata a expressão de entrada com os valores correspondentes
 string trataexpressao(string p, string s) {
    string resultado;
@@ -128,7 +128,7 @@ PilhaEncadeada posfixa(string p) {
                         int a = ConverteInteiro(y.GetChave());
                         y.SetChave(negacao(a)+'0');
                         pos.Empilha(y);
-                        break;
+                        
                     }else{   
                     // Desempilhando e armazenando as variaveis com valor padrão
                     y = pos.Desempilha();
@@ -162,6 +162,9 @@ PilhaEncadeada posfixa(string p) {
                 x.SetChave(negacao(digit) + '0');
                 pos.Empilha(x);
                 i = i+2; // Avance para o próximo caractere (o operando negado)
+                if (!aux.Vazia() && aux.Topo().GetChave() == '~') {
+                        aux.Desempilha(); // Desempilhar o '~'
+                       }
                 break;
             }else{ //empilha o operador caso o proximo valor não for um numero
                 aux.Empilha(x);
@@ -176,7 +179,9 @@ PilhaEncadeada posfixa(string p) {
                         int a = ConverteInteiro(y.GetChave());
                         y.SetChave(negacao(a)+'0');
                         pos.Empilha(y);
-                        break;
+                        if (!aux.Vazia() && aux.Topo().GetChave() == '~') {
+                        aux.Desempilha(); // Desempilhar o '~'
+                       }
                     }else{   
                     // Deempilhando e armazenando as variaveis com valor padrão
                     y = pos.Desempilha();
@@ -210,13 +215,17 @@ PilhaEncadeada posfixa(string p) {
         }
     }
     }
-   if(!aux.Vazia()){
-
+   while  (!aux.Vazia()){
+                    //tratando a negação
                     if(aux.Topo().GetChave() == '~'){
                         y = pos.Desempilha();
                         int a = ConverteInteiro(y.GetChave());
                         y.SetChave(negacao(a)+'0');
                         pos.Empilha(y);
+                        if (!aux.Vazia() && aux.Topo().GetChave() == '~') {
+                        aux.Desempilha(); // Desempilhar o '~'
+                       }
+                     
                     }else{   
                     // Dsempilhando e armazenando as variaveis com valor padrão
                     y = pos.Desempilha();

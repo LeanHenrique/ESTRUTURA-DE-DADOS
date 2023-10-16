@@ -1,7 +1,9 @@
 #ifndef PILHAH 
 #define PILHAH
 
-#include "../include/TipoItem.h"
+#include "TipoItem.h"
+#include<iostream>
+using namespace std;
 
 
 class TipoCelula

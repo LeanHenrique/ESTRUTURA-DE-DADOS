@@ -1,8 +1,9 @@
 #ifndef ARVOREH
 #define ARVOREH
-#include "../include/TipoItem.h"
-#include "../include/TipoNo.h"
+#include "TipoItem.h"
+#include "TipoNo.h"
 #include<string>
+#include <iostream>
 using namespace std;
 
 class ArvoreBinaria
