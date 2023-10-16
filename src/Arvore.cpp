@@ -6,26 +6,42 @@ ArvoreBinaria::ArvoreBinaria()
 raiz = NULL;
 }
 
-void ArvoreBinaria::Insere(TipoItem item){
-InsereRecursivo(raiz,item);
+
+void ArvoreBinaria::InsereEsquerda(TipoNo* &p, const string& combinacao) {
+    if(p==NULL){
+    return ;  
+}      
+else{
+   TipoNo* NovoNo = new TipoNo();
+   NovoNo->item = combinacao;
+   p->esq = NovoNo;
+}
+  
 }
 
-void ArvoreBinaria::InsereRecursivo(TipoNo* &p, TipoItem item){
-if(p==NULL){
-p = new TipoNo();
-p->item = item;
-}
+void ArvoreBinaria::InsereDireita(TipoNo* &p, const string& combinacao) {
+    if(p==NULL){
+    return ;  
+}      
 else{
-if(item.GetChave() < p->item.GetChave())
-InsereRecursivo(p->esq, item);
-else
-InsereRecursivo(p->dir, item);
+   TipoNo* NovoNo = new TipoNo();
+   NovoNo->item = combinacao;
+   p->dir = NovoNo;
 }
+  
+}
+  
+TipoNo * ArvoreBinaria::Getraiz(){
+    return raiz;
+}
+
+void ArvoreBinaria::Setraiz(TipoNo *p){
+    raiz = p;
 }
 
 void ArvoreBinaria::PreOrdem(TipoNo *p){
 if(p!=NULL){
-p->item.Imprime();
+cout << p->item << endl;
 PreOrdem(p->esq);
 PreOrdem(p->dir);
 }
@@ -34,7 +50,7 @@ PreOrdem(p->dir);
 void ArvoreBinaria::InOrdem(TipoNo *p){
 if(p!=NULL){
 InOrdem(p->esq);
-p->item.Imprime();
+cout << p->item << endl;
 InOrdem(p->dir);
 }
 }
@@ -43,7 +59,7 @@ void ArvoreBinaria::PosOrdem(TipoNo *p){
 if(p!=NULL){
 PosOrdem(p->esq);
 PosOrdem(p->dir);
-p->item.Imprime();
+cout << p->item << endl;
 }
 }
 

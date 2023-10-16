@@ -1,8 +1,7 @@
-#include "../include/Pilha.h"
+#include"../include/Calculadora.h"
 #include <iostream>
 #include <string>
 using namespace std;
-
 
 int prioridade(char c) {
     if (c == '~') {
@@ -48,6 +47,43 @@ bool VerificaDigito(char c) {
 //converte os valoress ASCII para inteiro
 int ConverteInteiro(char c){
     return c - '0';
+}
+
+bool busca(string s, char c){
+    for(int i = 0; i < static_cast<int>(s.size());i++){
+         if(s[i] == c){
+            return true;
+         }
+    }
+    return false;
+}
+
+//guarda os quantificadores "a" ou "e" em uma string
+string guardaQuant(string expressao){
+   string resultado;
+   for(int i = 0; i < static_cast<int>(expressao.size());i++){
+         if(expressao[i] == 'e' || expressao[i] == 'a'){
+            resultado += expressao[i];
+         }
+    }
+    return resultado;
+}
+
+int OperacaoB(char c, int a, int b){
+    switch (c){
+    case 'a':
+            if(a == 1 && b == 1){
+                return 1;
+            }
+            return 0;
+        case 'e':
+            if (a == 1 || b == 1) {
+                return 1;
+            }
+            return 0;
+        default:
+            throw std::runtime_error("Operador inválido");
+    }
 }
 
 //trata a expressão de entrada com os valores correspondentes
@@ -203,23 +239,3 @@ PilhaEncadeada posfixa(string p) {
     return pos; // Retornar a pilha de saída 
 }
 
-int main() {
-    // Teste posfixa
-    string expressao = "~ ( 0 | 1 ) & 2";
-    string valores = "101";
-    
-    string expressaotratada = trataexpressao(expressao,valores);
-    cout << expressaotratada << endl;
-    PilhaEncadeada resultado = posfixa(expressaotratada);
-    TipoItem x;
-
-    while (!resultado.Vazia()) {
-        x = resultado.Desempilha();
-        int a = ConverteInteiro(x.GetChave());
-        cout << a << " ";
-    }
-
-    cout << endl; 
-
-    return 0;
-}

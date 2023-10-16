@@ -1,13 +1,21 @@
 #ifndef TIPONOH
 #define TIPONOH
-#include "../include/TipoItem.h"
+#include <string>
+using namespace std;
 
 class TipoNo
 {
 public:
 TipoNo();
+void SetItem(string item);
+string GetItem();
+void SetResultado(char resultado);
+char GetResultado();
+TipoNo* GetEsq();
+TipoNo* GetDir();
 private:
-TipoItem item;
+char resultado;
+string item;
 TipoNo *esq;
 TipoNo *dir;
 friend class ArvoreBinaria;
