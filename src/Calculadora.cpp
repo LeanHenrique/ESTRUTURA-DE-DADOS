@@ -13,6 +13,16 @@ int prioridade(char c) {
     return 0; // Valor padrão para outros caracteres (como parênteses)
 }
 
+int potencia(int base, int expoente) {
+    if (expoente == 0) {
+        return 1; // Qualquer número elevado a 0 é 1.
+    }
+    if (expoente < 0) {
+        return 1 / (base * potencia(base, -expoente - 1));
+    }
+    return base * potencia(base, expoente - 1);
+}
+
 //calcula as operações & e |
 int Operacao(int a, int b, char op) {
     switch (op) {
@@ -128,6 +138,10 @@ PilhaEncadeada posfixa(string p) {
                         int a = ConverteInteiro(y.GetChave());
                         y.SetChave(negacao(a)+'0');
                         pos.Empilha(y);
+                    if (!aux.Vazia() && aux.Topo().GetChave() == '~') {
+                    aux.Desempilha(); // Desempilhar o '('
+                }
+
                         
                     }else{   
                     // Desempilhando e armazenando as variaveis com valor padrão

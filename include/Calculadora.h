@@ -7,6 +7,7 @@ using namespace std;
 
 int prioridade(char c);
 int Operacao(int a, int b, char op);
+int potencia(int base, int expoente);
 int negacao(int a);
 bool VerificaDigito(char c);
 int ConverteInteiro(char c);

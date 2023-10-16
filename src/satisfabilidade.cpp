@@ -109,25 +109,19 @@ void calcularResultadosExpressoes(ArvoreBinaria& arvore, TipoNo* no, string quan
 
         //verifica se o resultado é positivo e se for, armazena a expressao de possiveis valores
         if(item  == "1"){ 
-             if(quant[nivel] == 'a'){
+             if(FilhoDireito == "1"  && FilhoEsquerdo == "1"){
                 no->SetExpressao(no->GetItem());
-             }else{
+             }else if(FilhoDireito == "1"){
+             int totalD = no->GetDir()->GetTotalConexoes();
+             for(int i = 0; i < totalD; i++ ){
+             no->SetExpressao(no->GetDir()->GetExpressao(i));
+            }}else if(FilhoEsquerdo == "1"){
              int totalE = no->GetEsq()->GetTotalConexoes();
              for(int i = 0; i < totalE; i++ ){
-             string valores = no->GetEsq()->GetExpressao(i);   
-             no->SetExpressao(valores);
+             no->SetExpressao(no->GetEsq()->GetExpressao(i));
             }
-            
-            int totalD = no->GetDir()->GetTotalConexoes();
-             for(int i = 0; i < totalD; i++ ){
-             string valores = no->GetDir()->GetExpressao(i);   
-             no->SetExpressao(valores);
             }
              }
-
-            
-        
-        }
 
         // Atualize o valor do nó na árvore com o resultado da expressão
         no->SetItem(item);
@@ -137,17 +131,11 @@ void calcularResultadosExpressoes(ArvoreBinaria& arvore, TipoNo* no, string quan
 
 
 string verificaPossivel(ArvoreBinaria& Arvore,TipoNo* raiz, string quant, string expressao){
-    int Total = raiz->GetTotalConexoes();
-    int TotalB;
-    if(quant.size() == 1){
-        TotalB = 2;
-    } else {
-    TotalB =  (quant.size() * quant.size());
-    }
-    if(Total == TotalB){
-       string expressaor = expressao;
+    
+    if(busca(raiz->GetExpressao(0),'e')){
+       string expressaor = raiz->GetExpressao(0);
             for(int i = 0; i < static_cast<int>(expressaor.size()); i++){
-                if(expressao[i] == 'e'){
+                if(expressaor[i] == 'e'){
                 expressaor[i] = 'a';
                }
               }
