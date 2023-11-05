@@ -1,4 +1,5 @@
 #include "../include/Grafo.hpp"
+#include "verificaGuloso.cpp"
 
      
 int main(){     
@@ -6,6 +7,7 @@ int main(){
        // Movida a parte de leitura do grafo para o final
     int n;
     std::cin >> n; // Número de vértices
+
 
     for (int i = 0; i < n; ++i) {
         meuGrafo.InsereVertice();
@@ -20,4 +22,15 @@ int main(){
             meuGrafo.InsereAresta(i, vizinho);
         }
     } 
+    
+    int cor;
+    int cont = 0;
+    while(cont < n){
+        std::cin >> cor;
+        meuGrafo.InsereCor(cor);
+    }
+    
+    int resultado = verificaGrafo(meuGrafo);
+
+    std::cout << resultado << std::endl;
 }

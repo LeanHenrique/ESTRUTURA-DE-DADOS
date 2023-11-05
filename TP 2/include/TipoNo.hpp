@@ -10,6 +10,8 @@ public:
     void SetProximo(TipoNo* prox);
     int GetConexao(int i);
     void SetConexao(int conex);
+    int GetCor();
+    void SetCor(int c);
     int TotalConexao();
     int item;
     

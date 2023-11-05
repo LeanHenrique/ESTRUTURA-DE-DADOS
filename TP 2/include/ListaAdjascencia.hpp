@@ -10,6 +10,8 @@ ListaAdjascencia();
  
 void InsereVertice();
 void InsereAresta(int v, int w);
+void InsereCor(int c);
+TipoNo* GetPrimeiro();
 int GetTotalVertices();
 int GetTotalArestas();
 TipoNo* EncontraVertice(int valor);

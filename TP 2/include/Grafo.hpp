@@ -10,11 +10,14 @@ class Grafo{
         ~Grafo();
         void InsereVertice();
         void InsereAresta(int v, int w);
+        void InsereCor(int c);
         int QuantidadeVertices();
         int QuantidadeArestas();
         int GrauMinimo();
         int GrauMaximo();
         void ImprimeVizinhos(int v);
+        bool verificaVertice(int v);
+        int verificaGrafo(Grafo& meuGrafo);
     private:
         ListaAdjascencia vertices;
 };

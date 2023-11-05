@@ -1,4 +1,5 @@
 #include "../include/Grafo.hpp"
+#include "verificaGuloso.cpp"
 
 Grafo::Grafo() {
 }
@@ -12,6 +13,14 @@ void Grafo::InsereVertice() {
 
 void Grafo::InsereAresta(int v, int w) {
    vertices.InsereAresta(v,w);
+}
+
+void Grafo::InsereCor(int c){
+    vertices.InsereCor(c);
+}
+
+ListaAdjascencia Grafo::GetVertices(){
+    return vertices;
 }
 
 int Grafo::QuantidadeVertices() {
@@ -62,4 +71,30 @@ void Grafo::ImprimeVizinhos(int v) {
 
         std::cout << std::endl;
     } 
+}
+
+//verifica se vertice é guloso
+bool Grafo::verificaVertice(int v){
+   TipoNo* verticeOrigem = vertices.EncontraVertice(v);
+   TipoNo* aux = new TipoNo();
+   if (verticeOrigem) {
+    int conta_cor = 0;
+    for(int i = 0; i < verticeOrigem->TotalConexao(); i++){ //anda pelas conexões do vertice
+    int j = verticeOrigem->GetConexao(i); //recebe o vertice conectado
+    aux = vertices.EncontraVertice(j);//recebe o nó correspondente ao vertice conectado
+    int cores_verificadas[conta_cor]; //guarda as cores ja verificadas
+    if(verticeOrigem->GetCor() == conta_cor-1){ //verifica se o vertice está ligado a todas as cores menores que ele
+        return true;
+    }else if(aux->GetCor() < verticeOrigem->GetCor()){
+        if(!busca(cores_verificadas, conta_cor, aux->GetCor())){ //verifica se a cor foi verificada
+        cores_verificadas[conta_cor] = aux->GetCor();//adiciona cor verificada no array
+        conta_cor++;
+        }
+    }
+    }
+   }else{
+    //trata vertice inexistente
+   }
+   return false;
+   
 }

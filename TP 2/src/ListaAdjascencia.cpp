@@ -41,6 +41,21 @@ void ListaAdjascencia::InsereAresta(int o, int d){
     }
 }
 
+void ListaAdjascencia::InsereCor(int c){
+       TipoNo* atual = primeiro;
+       while(atual != nullptr){
+        if(atual->GetCor() != 0){
+            atual = atual->GetProximo();
+        }else{
+        atual->SetCor(c);
+       }
+}
+}
+
+TipoNo* ListaAdjascencia::GetPrimeiro(){
+    return primeiro;
+}
+
 TipoNo* ListaAdjascencia::EncontraVertice(int valor) {
     TipoNo* atual = primeiro;
     while (atual) {
@@ -51,7 +66,6 @@ TipoNo* ListaAdjascencia::EncontraVertice(int valor) {
     }
     return nullptr; // Vértice não encontrado
 }
-
 
 int ListaAdjascencia::GetTotalVertices(){
     return TotalVertices;

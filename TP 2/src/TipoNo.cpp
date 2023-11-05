@@ -36,6 +36,14 @@ void TipoNo::SetConexao(int d) {
     }
 }
 
+void TipoNo::SetCor(int c){
+   cor = c;
+}
+
+int TipoNo::GetCor(){
+    return cor;
+}
+
 int TipoNo::TotalConexao(){
     return TotalConexoes;
 }
