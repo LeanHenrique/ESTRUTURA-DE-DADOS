@@ -1,5 +1,5 @@
 #include "../include/Grafo.hpp"
-#include "verificaGuloso.cpp"
+#include "../include/verificaGuloso.hpp"
 
      
 int main(){     
