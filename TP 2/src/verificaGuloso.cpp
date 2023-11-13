@@ -52,6 +52,7 @@ bool verificaVertice(Grafo& meuGrafo, int v) {
         }
     } else {
         // trata vértice inexistente
+        std::cerr << "Erro: Vértice inexistente - ID: " << v << std::endl;
     }
 
     // Registra o acesso à memória antes do último if
