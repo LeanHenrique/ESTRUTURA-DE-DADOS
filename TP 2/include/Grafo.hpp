@@ -14,9 +14,6 @@ class Grafo{
         ListaAdjascencia GetVertices();
         int QuantidadeVertices();
         int QuantidadeArestas();
-        int GrauMinimo();
-        int GrauMaximo();
-        void ImprimeVizinhos(int v);
     private:
         ListaAdjascencia vertices;
 };

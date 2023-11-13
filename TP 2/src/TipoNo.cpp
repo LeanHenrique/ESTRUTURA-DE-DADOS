@@ -8,6 +8,10 @@ TipoNo::TipoNo() {
     cor = 0;
 }
 
+void TipoNo::setItem(int i){
+    item = i;
+}
+
 int TipoNo::GetItem() {
     return item;
 }

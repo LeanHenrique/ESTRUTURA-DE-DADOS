@@ -1,6 +1,4 @@
-
 #include "../include/ListaAdjascencia.hpp"
-
 
 ListaAdjascencia::ListaAdjascencia() {
     primeiro = nullptr;
@@ -15,8 +13,7 @@ ListaAdjascencia::~ListaAdjascencia() {
 void ListaAdjascencia::InsereVertice() {
     TipoNo* novo = new TipoNo();
     novo->item = TotalVertices;
-    
-    
+
     if (!primeiro) {
         primeiro = novo;
         ultimo = novo;
@@ -24,11 +21,11 @@ void ListaAdjascencia::InsereVertice() {
         ultimo->SetProximo(novo);
         ultimo = novo;
     }
-    
+
     TotalVertices++;
 }
 
-void ListaAdjascencia::InsereAresta(int o, int d){
+void ListaAdjascencia::InsereAresta(int o, int d) {
     TipoNo* verticeOrigem = EncontraVertice(o);
 
     if (verticeOrigem) {
@@ -41,18 +38,18 @@ void ListaAdjascencia::InsereAresta(int o, int d){
     }
 }
 
-void ListaAdjascencia::InsereCor(int c){
-       TipoNo* atual = primeiro;
-       while(atual != nullptr){
-        if(atual->GetCor() != 0){
-            atual = atual->GetProximo();
-        }else{
-        atual->SetCor(c);
-       }
-}
+void ListaAdjascencia::InsereCor(int c) {
+    TipoNo* atual = primeiro;
+    while (atual != nullptr) {
+        if (atual->GetCor() == 0) {
+            atual->SetCor(c);
+            break;
+        }
+        atual = atual->GetProximo();
+    }
 }
 
-TipoNo* ListaAdjascencia::GetPrimeiro(){
+TipoNo* ListaAdjascencia::GetPrimeiro() {
     return primeiro;
 }
 
@@ -67,11 +64,10 @@ TipoNo* ListaAdjascencia::EncontraVertice(int valor) {
     return nullptr; // Vértice não encontrado
 }
 
-int ListaAdjascencia::GetTotalVertices(){
+int ListaAdjascencia::GetTotalVertices() {
     return TotalVertices;
 }
 
-int ListaAdjascencia::GetTotalArestas(){
-    return TotalArestas/2;
+int ListaAdjascencia::GetTotalArestas() {
+    return TotalArestas / 2;
 }
-

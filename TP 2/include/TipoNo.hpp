@@ -5,6 +5,7 @@ const int MAX_CONEXOES = 100;
 class TipoNo {
 public:
     TipoNo();
+    void setItem(int item);
     int GetItem();
     TipoNo* GetProximo();
     void SetProximo(TipoNo* prox);
