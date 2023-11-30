@@ -22,7 +22,9 @@ TipoNo * Getraiz();
 void PorNivel();
 void PreOrdem(TipoNo* p);
 void InOrdem(TipoNo* p);
-void PosOrdem(TipoNo* p);
+void CalculaResultado(TipoNo* p);
+void atualizar(TipoNo*& p, int inicio, int fim, matriz& A);
+matriz consulta(TipoNo*& p, int inicio, int fim, matriz A);
 private:
 TipoNo *raiz;
 };

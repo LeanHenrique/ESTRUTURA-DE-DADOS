@@ -8,9 +8,13 @@ matriz::matriz(){
         }
 }
 
-void matriz::setElemento(int linha, int coluna, int valor) {
+void matriz::setElemento(int linha, int coluna, int valor, bool incrementar) {
     if (linha >= 0 && linha < 2 && coluna >= 0 && coluna < 2) {
-        elementos[linha][coluna] = valor;
+        if (incrementar) {
+            elementos[linha][coluna] += valor;
+        } else {
+            elementos[linha][coluna] = valor;
+        }
     } else {
         std::cerr << "Índices inválidos!" << std::endl;
     }
