@@ -33,4 +33,3 @@ TipoNo* TipoNo::GetDir(){
 TipoNo* TipoNo::GetEsq(){
     return esq;
 }
-

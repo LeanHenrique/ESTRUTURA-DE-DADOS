@@ -4,8 +4,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-OBJS = $(OBJ)/calculadora.o $(OBJ)/arvore.o $(OBJ)/matriz.o $(OBJ)/TipoNo.o $(OBJ)/maintree.o
-HDRS = $(INC)/arvore.h $(INC)/matriz.h $(INC)/TipoNo.h $(INC)/calculadora.h 
+OBJS = $(OBJ)/calculadora.o $(OBJ)/arvore.o $(OBJ)/matriz.o $(OBJ)/TipoNo.o $(OBJ)/main.o
+HDRS = $(INC)/arvore.h $(INC)/matriz.h $(INC)/calculadora.h $(INC)/TipoNo.h 
 CFLAGS = -Wall -g -c -I$(INC)
 DEBUG_FLAGS = -g
 
@@ -16,8 +16,8 @@ all: $(EXE)
 $(EXE): $(OBJS)
 	$(CC) -o $(EXE) $(OBJS) $(LIBS)
 
-$(OBJ)/maintree.o: $(HDRS) $(SRC)/maintree.cpp
-	$(CC) $(CFLAGS) -o $(OBJ)/maintree.o $(SRC)/maintree.cpp
+$(OBJ)/main.o: $(HDRS) $(SRC)/main.cpp
+	$(CC) $(CFLAGS) -o $(OBJ)/main.o $(SRC)/main.cpp
 
 $(OBJ)/calculadora.o: $(HDRS) $(SRC)/calculadora.cpp
 	$(CC) $(CFLAGS) -o $(OBJ)/calculadora.o $(SRC)/calculadora.cpp

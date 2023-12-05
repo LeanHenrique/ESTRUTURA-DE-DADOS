@@ -15,15 +15,16 @@ matriz Matrizidentidade() {
     return identidade;
 }
 
-// Função para multiplicar matrizes
 matriz multiplicaMatrizes(matriz A, matriz B) {
     matriz result;
     for (int i = 0; i < 2; ++i) {
         for (int j = 0; j < 2; ++j) {
-            int valorAtual = 0;
+            long long int valorAtual = 0;
             for (int k = 0; k < 2; ++k) {
-                valorAtual += A.getElemento(i, k) * B.getElemento(k, j);
+                valorAtual += (A.getElemento(i, k) * B.getElemento(k, j));
             }
+            // Obter apenas o dígito mais significativo
+            valorAtual %= 100000000;
             result.setElemento(i, j, valorAtual, false);
         }
     }

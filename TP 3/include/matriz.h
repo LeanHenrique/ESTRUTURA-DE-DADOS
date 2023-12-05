@@ -8,11 +8,11 @@
 class matriz {
 public:
     matriz();
-    void setElemento(int linha, int coluna, int valor, bool incrementar);
-    int getElemento(int linha, int coluna);
+    void setElemento(int linha, int coluna, long long valor, bool incrementar);
+    long long getElemento(int linha, int coluna);
     
 private:
-    int elementos[2][2];
+    long long elementos[2][2];
 };
 
 #endif

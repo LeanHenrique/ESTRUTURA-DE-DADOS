@@ -19,12 +19,9 @@ void ConstroiArvore(TipoNo* &p, int inicio, int fim);
 void ApagaRecursivo(TipoNo* p);
 void Setraiz(TipoNo *p);
 TipoNo * Getraiz();
-void PorNivel();
-void PreOrdem(TipoNo* p);
-void InOrdem(TipoNo* p);
 void CalculaResultado(TipoNo* p);
-void atualizar(TipoNo*& p, int inicio, int fim, matriz& A);
-matriz consulta(TipoNo*& p, int inicio, int fim, matriz A);
+void atualizar(TipoNo*& p,  int i, int inicio, int fim, matriz& A);
+matriz consulta(TipoNo*& p, int inicio, int fim);
 private:
 TipoNo *raiz;
 };
